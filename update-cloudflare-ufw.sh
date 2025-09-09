@@ -5,7 +5,7 @@ declare -a IP_URLS=("https://www.cloudflare.com/ips-v4/" "https://www.cloudflare
 
 RULES_DESC=$(ufw status numbered | grep "$NAME" | awk -F"[][]" '{print $2}' | tr --delete [:blank:] | sort -rn)
 for NUM in $RULES_DESC; do
-	yes | ufw delete $NUM
+	ufw -f delete $NUM
 done
 
 for IP_URL in "${IP_URLS[@]}"; do
